@@ -36,7 +36,7 @@ function LoginForm({ adminId, posterId }) {
 
     login(allValues, formik);
 
-    // console.log("allValues", allValues);
+    console.log("allValues", allValues);
   };
 
   // const handleNextStep = () => {
