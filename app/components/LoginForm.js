@@ -1,7 +1,9 @@
+"use client";
 import { Field, Form, Formik } from "formik";
 import { site } from "../config/index";
 import Image from "next/image";
 import useMockLogin from "../hooks/useMockLogin";
+import { useState } from "react";
 
 function LoginForm({ adminId, posterId }) {
   const [showWrongPassword, setShowWrongPassword] = useState(false);
